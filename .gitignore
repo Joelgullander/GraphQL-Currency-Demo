@@ -1,0 +1,6 @@
+node_modules
+graphql-schema.json
+client/src/queries/types
+client/src/types/graphql-global-types.ts
+server/dist
+react-app-env.d.ts
