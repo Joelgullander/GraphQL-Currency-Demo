@@ -16,8 +16,7 @@ interface IProps {
     onRemove: Function
 }
 
-const CountryItem = (props: IProps) => {
-    const { name, valueToBeConverted, currencyRates, onRemove } = props
+const CountryItem = ({ name, valueToBeConverted, currencyRates, onRemove }: IProps) => {
     const { loading, error, data } = useQuery<Country, CountryVariables>(
         GET_COUNTRY,
         {

@@ -5,21 +5,22 @@ import {
 import { Button } from 'antd';
 import AuthService from '../services/AuthService';
 
-const AuthPage = (props: any) => {
-  console.log(props)
+const AuthPage = () => {
   const [ loading, setLoading ] = useState(false);
   const [ success, setSuccess ] = useState(false);
 
   const login = () => {
     setLoading(true);
-    AuthService.login().then(_ => {
-      // Set timeout for debug purpose
-      setTimeout(() => {
+    AuthService.login().then(success => {
+      if(success) {
+        // Set timeout for debug purpose
+        setTimeout(() => {
+          setLoading(false)
+          setSuccess(true)
+        }, 2000)
+      } else {
         setLoading(false)
-        setSuccess(true)
-      }, 2000)
-    }).catch(e => {
-      setLoading(false)
+      }
     })
   }
 

@@ -33,7 +33,13 @@ class AuthService {
     }
 
     getAuthHeader() {
-      //  return {headers: {Authorization: 'Bearer ' + this.getUserInfo().token }};
+      const token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
+
+      if(!token) {
+        return ''
+      }
+
+      return `Bearer ${token}`;
     }
 }
 

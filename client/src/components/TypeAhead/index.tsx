@@ -16,7 +16,7 @@ const CountryItem = (props: IProps) => {
       variables: { text: needle }
     }
   );
-    // TODO: Add spinner and failsafe
+
   return (
     <AutoComplete
       onSearch={val => setNeedle(val) }

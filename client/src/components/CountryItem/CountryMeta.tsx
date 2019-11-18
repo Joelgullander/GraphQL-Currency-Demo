@@ -10,8 +10,7 @@ interface IProps {
     onRemove: Function
 }
 
-const CountryMeta = (props: IProps) => {
-    const { country, currencies, valueToBeConverted, onRemove } = props
+const CountryMeta = ({ country, currencies, valueToBeConverted, onRemove }: IProps) => {
     const countryCurrency = country.currency ? country.currency.code : null
     const conversionRate = currencies
         ? currencies.currencies.rates.find(

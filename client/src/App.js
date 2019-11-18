@@ -11,8 +11,21 @@ import ApolloClient from 'apollo-boost';
 import './App.css';
 import AuthService from './services/AuthService';
 
+
+
 const apolloClient = new ApolloClient({
-    uri: 'http://localhost:4000/graphql',
+    uri: '/graphql',
+    request: async operation => {
+      // Get JWT token from local storage
+      const token = AuthService.getAuthHeader()
+
+      // Pass token to headers
+      operation.setContext({
+        headers: {
+          Authorization: token
+        }
+      })
+    }
 });
 
 function App() {
