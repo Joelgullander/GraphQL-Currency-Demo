@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { Row, InputNumber } from 'antd'
+import { Row, InputNumber, Spin, Icon } from 'antd'
 import {
     GET_CURRENCIES,
     CurrencyResponse,
@@ -8,7 +8,7 @@ import {
 } from '../queries'
 import CountryItem from '../components/CountryItem'
 import TypeAhead from '../components/TypeAhead'
-import Config from '../config';
+import Config from '../config'
 
 const StartPage = () => {
     const [valueToBeConverted, setValueToBeConverted] = useState<number>(100)
@@ -20,24 +20,37 @@ const StartPage = () => {
     })
 
     if (loading) {
-        return <pre>Loading countries...</pre>
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '40px',
+                }}
+            >
+                <Icon type="loading" style={{ fontSize: 54 }} spin />
+            </div>
+        )
     }
+
     return (
         <div>
             <div style={{ background: '#ECECEC', padding: '30px' }}>
                 <Row gutter={16} type={'flex'}>
                     <Fragment>
-                        {countries.map(
-                            (country, index) => (
-                                <CountryItem
-                                    key={country + index}
-                                    name={country}
-                                    valueToBeConverted={valueToBeConverted}
-                                    currencyRates={data}
-                                    onRemove={() => setCountry(countries.filter(c => c !== country))}
-                                />
-                            )
-                        )}
+                        {countries.map((country, index) => (
+                            <CountryItem
+                                key={country + index}
+                                name={country}
+                                valueToBeConverted={valueToBeConverted}
+                                currencyRates={data}
+                                onRemove={() =>
+                                    setCountry(
+                                        countries.filter(c => c !== country)
+                                    )
+                                }
+                            />
+                        ))}
                     </Fragment>
                 </Row>
             </div>

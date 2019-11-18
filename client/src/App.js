@@ -6,8 +6,10 @@ import {
 } from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 import StartPage from './routes/StartPage';
+import AuthPage from './routes/AuthPage';
 import ApolloClient from 'apollo-boost';
 import './App.css';
+import AuthService from './services/AuthService';
 
 const apolloClient = new ApolloClient({
     uri: 'http://localhost:4000/graphql',
@@ -18,9 +20,11 @@ function App() {
     <ApolloProvider client={apolloClient}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
-            <StartPage />
-          </Route>
+          <Route exact path="/" render={() => (
+            AuthService.hasValidSession() ? (
+              <StartPage />
+            ) : <AuthPage />
+          )} />
         </Switch>
       </BrowserRouter>
     </ApolloProvider>
