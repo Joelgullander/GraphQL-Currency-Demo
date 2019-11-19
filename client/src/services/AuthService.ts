@@ -19,9 +19,10 @@ class AuthService {
         try {
           const date = new Date(0);
           const { exp } = jwtDecode(token);
-
           date.setUTCSeconds(exp);
 
+          const diff = date.valueOf() - new Date().valueOf();
+          console.log(`${(diff / 1000 / 60 / 60).toFixed(0)} hours left until token expires`)
           return date.valueOf() > new Date().valueOf();
 
         } catch (err) {
@@ -40,6 +41,10 @@ class AuthService {
       }
 
       return `Bearer ${token}`;
+    }
+
+    clearSession() {
+      localStorage.removeItem('token');
     }
 }
 

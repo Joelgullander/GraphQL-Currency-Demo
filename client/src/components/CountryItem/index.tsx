@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { Card, Skeleton, Col } from 'antd'
+import { Card, Skeleton, Col, Button } from 'antd'
 import {
     GET_COUNTRY,
     Country,
@@ -17,7 +17,7 @@ interface IProps {
 }
 
 const CountryItem = ({ name, valueToBeConverted, currencyRates, onRemove }: IProps) => {
-    const { loading, error, data } = useQuery<Country, CountryVariables>(
+    const { loading, error, data, refetch } = useQuery<Country, CountryVariables>(
         GET_COUNTRY,
         {
             variables: { country: name },
@@ -29,6 +29,13 @@ const CountryItem = ({ name, valueToBeConverted, currencyRates, onRemove }: IPro
             {!data || loading ? (
                 <Card style={{ height: '100%' }} title={'Loading...'}>
                     <Skeleton />
+                    {error &&
+                      <div>
+                        <Button type="danger" shape="round" loading={loading} onClick={() => refetch()}>
+                          Retry
+                        </Button>
+                      </div>
+                    }
                 </Card>
             ) : (
                 <CountryMeta

@@ -22,8 +22,9 @@ const CountryMeta = ({ country, currencies, valueToBeConverted, onRemove }: IPro
             style={{ height: '100%' }}
             title={country.name}
             actions={[
-                <Icon type="delete" key="delete" onClick={() => onRemove()} />,
+                <Icon type="delete" key="delete" onClick={() => onRemove()} />
             ]}
+            bodyStyle={{ paddingBottom: '60px'}}
             bordered={false}
         >
             {country.population && (

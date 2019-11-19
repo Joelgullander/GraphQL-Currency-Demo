@@ -11,10 +11,19 @@ import ApolloClient from 'apollo-boost';
 import './App.css';
 import AuthService from './services/AuthService';
 
-
+const customFetch = (uri, options) => {
+  return fetch(uri, options)
+  .then(response => {
+    if (response.status === 401) {  // or handle 400 errors
+      return Promise.reject(response.status);
+    }
+    return response;
+  });
+}
 
 const apolloClient = new ApolloClient({
     uri: '/graphql',
+    fetch: customFetch,
     request: async operation => {
       // Get JWT token from local storage
       const token = AuthService.getAuthHeader()
@@ -25,6 +34,12 @@ const apolloClient = new ApolloClient({
           Authorization: token
         }
       })
+    },
+    onError: ({ networkError }) => {
+      if(networkError === 401) {
+          AuthService.clearSession();
+          window.location.reload()
+        }
     }
 });
 
