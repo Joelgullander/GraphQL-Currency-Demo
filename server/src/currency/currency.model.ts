@@ -8,7 +8,6 @@ interface CurrencyVariables {
 const getCurrenciesResolver = async (query: any, variables: CurrencyVariables) => {
     const { currency } = variables
     const data = await getCurrenciesEndpoint(currency);
-    console.log(data.data)
     return data.data
 }
 

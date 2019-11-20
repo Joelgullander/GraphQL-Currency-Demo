@@ -43,7 +43,7 @@ const apolloClient = new ApolloClient({
     }
 });
 
-function App() {
+const App = () => {
   return (
     <ApolloProvider client={apolloClient}>
       <BrowserRouter>

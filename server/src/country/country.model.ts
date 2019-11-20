@@ -5,7 +5,7 @@ interface CountryVariables {
   country: string
 }
 
-const getCountryResolver = async (query: any, variables: CountryVariables) => {
+const getCountryResolver = async (parent: any, variables: CountryVariables) => {
     const { country } = variables
     const data = await getCountryEndpoint(country);
     return data.data[0]
@@ -14,10 +14,11 @@ const getCountryResolver = async (query: any, variables: CountryVariables) => {
 interface SearchVariables {
   text: string
 }
-const searchCountryResolver = async (query: any, variables: SearchVariables) => {
-  const { text } = variables;
-  const data = await searchCountryEndpoint(text);
-  return data.data
+
+const searchCountryResolver = async (parent: any, variables: SearchVariables) => {
+    const { text } = variables;
+    const data = await searchCountryEndpoint(text);
+    return data.data
 }
 
 const Country = {

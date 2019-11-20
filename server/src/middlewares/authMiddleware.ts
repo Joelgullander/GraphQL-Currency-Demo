@@ -7,8 +7,8 @@ const verifyOptions = {
   issuer,
   subject,
   audience,
-  expiresIn:  "12h",
-  algorithms:  ["HS256"]
+  expiresIn: "12h",
+  algorithms: ["HS256"]
  };
 
 const authenticationMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -24,7 +24,6 @@ const authenticationMiddleware = (req: Request, res: Response, next: NextFunctio
     } else {
       throw new Error('Jwt is not valid')
     }
-
   } catch (e) {
     console.error(e)
     res.status(401).json(e);

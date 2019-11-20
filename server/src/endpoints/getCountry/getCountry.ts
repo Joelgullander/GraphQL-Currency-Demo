@@ -6,9 +6,7 @@ interface Request {
   data: Country[]
 }
 
-// filter out unecessary data
-// ?fields=name;capital;currencies
 const getCountryEndpoint = (country: string) : Promise<Request> =>
-    axios.get(`https://restcountries.eu/rest/v2/name/${country}`)
+    axios.get(`https://restcountries.eu/rest/v2/name/${country}?fields=name;population;currencies;`)
 
 export default getCountryEndpoint;

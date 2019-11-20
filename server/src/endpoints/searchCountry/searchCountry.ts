@@ -7,7 +7,7 @@ interface Request {
 }
 
 const searchCountryEndpoint = (text: string) : Promise<Request> =>
-    axios.get(`https://restcountries.eu/rest/v2/name/${text}?fullText=false`)
+    axios.get(`https://restcountries.eu/rest/v2/name/${text}?fullText=false&fields=name`)
 
 export default searchCountryEndpoint;
 

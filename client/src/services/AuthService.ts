@@ -1,8 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode'
 class AuthService {
-
-    login = async () => {
+    login = async () : Promise<boolean> => {
       try {
         const data = await axios.post('/login');
         localStorage.setItem('token', data.data);
@@ -12,7 +11,7 @@ class AuthService {
       }
     }
 
-    hasValidSession() {
+    hasValidSession() : boolean {
       const token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
 
       if(token) {
@@ -33,7 +32,7 @@ class AuthService {
       return false
     }
 
-    getAuthHeader() {
+    getAuthHeader() : string {
       const token = localStorage.getItem('token') ? localStorage.getItem('token') : null;
 
       if(!token) {
@@ -44,6 +43,7 @@ class AuthService {
     }
 
     clearSession() {
+      console.log('Removing token')
       localStorage.removeItem('token');
     }
 }

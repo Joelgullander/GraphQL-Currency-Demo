@@ -32,7 +32,7 @@ app.post('/login', (req, res) => {
 });
 
 app.use(authMiddleware);
-app.use(apiLimiterMiddleware)
+app.use(apiLimiterMiddleware);
 server.applyMiddleware({ app })
 
 // The `listen` method launches a web server.
