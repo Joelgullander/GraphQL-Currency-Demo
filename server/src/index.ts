@@ -4,8 +4,9 @@ import jwt from 'jsonwebtoken'
 import uuidGen from 'uuid/v1';
 import schema from './typedefs';
 import { authMiddleware, apiLimiterMiddleware } from './middlewares';
+import { unlessHelper } from './lib';
 import config from './config';
-const { issuer, subject, audience, jwtSecret } = config;
+const { issuer, subject, audience, jwtSecret, withAuth } = config;
 
 // SIGNING OPTIONS
 const signOptions = {
@@ -31,8 +32,11 @@ app.post('/login', (req, res) => {
   }
 });
 
-app.use(authMiddleware);
-app.use(apiLimiterMiddleware);
+if(withAuth) {
+  app.use(authMiddleware);
+  app.use(apiLimiterMiddleware);
+}
+
 server.applyMiddleware({ app })
 
 // The `listen` method launches a web server.

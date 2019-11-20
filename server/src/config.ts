@@ -4,5 +4,6 @@ export default {
   audience: 'https://joelgullander.se',
   jwtSecret: 'tempsecret',
   rateLimitPeriod: 1,
-  rateLimitRequests: 30
+  rateLimitRequests: 30,
+  withAuth: false
 }
