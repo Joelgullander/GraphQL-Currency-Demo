@@ -16,3 +16,6 @@ Client:
 cd ./client
 npm start
 ```
+
+## Activate auth & ratelimit
+Go to ./server/config.ts and activate `withAuth`
